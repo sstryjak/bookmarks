@@ -1,5 +1,9 @@
 Bookmarks::Application.routes.draw do
-  resources :bookmarks
+  resources :bookmarks do
+    collection do
+      get :add
+    end
+  end
 
   root :to => "bookmarks#index"
 
@@ -19,12 +23,12 @@ Bookmarks::Application.routes.draw do
 
   # Sample resource route with options:
   #   resources :products do
-  #     member do
+  #     member do           - acts on one specific item
   #       get 'short'
   #       post 'toggle'
   #     end
   #
-  #     collection do
+  #     collection do       - acts on all items
   #       get 'sold'
   #     end
   #   end

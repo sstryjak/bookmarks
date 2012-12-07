@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204062251) do
+ActiveRecord::Schema.define(:version => 20121207000613) do
 
   create_table "bookmarks", :force => true do |t|
     t.string   "name"
@@ -19,5 +19,17 @@ ActiveRecord::Schema.define(:version => 20121204062251) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "password"
+    t.string   "token",      :limit => 64
+    t.string   "email"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "users", ["token"], :name => "index_users_on_token"
+  add_index "users", ["username"], :name => "index_users_on_username"
 
 end

@@ -1,6 +1,10 @@
 class BookmarksController < ApplicationController
   # GET /bookmarks
   # GET /bookmarks.json
+
+  before_filter :get_user_from_token, :only => [:add]
+  
+
   def index
     @bookmarks = Bookmark.all
 
@@ -80,4 +84,18 @@ class BookmarksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # this is a GET method
+  def add
+    if params[:href] && params[:title]
+      Bookmark.create!({url: params[:href], name: params[:title]})
+    end
+    render text: '', status: 200
+  end
+
+  private
+  def get_user_from_token
+    #@current_user = User.find_by_token(params[:token]) if params[:token]
+  end
+
 end
